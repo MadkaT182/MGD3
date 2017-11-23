@@ -14,21 +14,26 @@ local function GetPosition(pn)
 end;
 end;
 
-t[#t+1] = Def.ActorFrame {
-	Def.Sprite{
-		BeginCommand=cmd(FullScreen);
-		InitCommand=function(self)
-			if Song then
-				if Song:HasBackground() then
-						self:LoadBackground(Song:GetBackgroundPath());
-					else
-						self:Load(THEME:GetPathG("Common fallback", "background"));
+if Song then
+	if GAMESTATE:PlayerIsUsingModifier(PLAYER_1,'StaticBG') or GAMESTATE:PlayerIsUsingModifier(PLAYER_2,'StaticBG') or Song:HasBGChanges() then
+	else
+		t[#t+1] = Def.ActorFrame {
+			Def.Sprite{
+				BeginCommand=cmd(FullScreen);
+				InitCommand=function(self)
+					if Song then
+						if Song:HasBackground() then
+								self:LoadBackground(Song:GetBackgroundPath());
+							else
+								self:Load(THEME:GetPathG("Common fallback", "background"));
+						end;
+					end;
 				end;
-			end;
-		end;
-		OnCommand=cmd(blend,'BlendMode_Add';diffusealpha,.5);
-	};
-};
+				OnCommand=cmd(blend,'BlendMode_Add';diffusealpha,.5);
+			};
+		};
+	end;
+end;
 
 for player in ivalues(GAMESTATE:GetHumanPlayers()) do
 	t[#t+1] = LoadActor("playerfilter")..{

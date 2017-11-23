@@ -1,6 +1,7 @@
 local t = Def.ActorFrame {};
 local Song = GAMESTATE:GetCurrentSong();
 local SongTit = Song:GetDisplayMainTitle();
+local path = "../ScreenEvaluationNormal decorations/"
 
 if not ThemePrefs.Get("AltResult") then
 t[#t+1] = Def.ActorFrame {
@@ -55,21 +56,22 @@ t[#t+1] = Def.ActorFrame {
 		end;
 		OnCommand=cmd(x,SCREEN_CENTER_X-160;y,SCREEN_CENTER_Y+8);
 	};
-	LoadActor("rankbg")..{
+	LoadActor(path.."rankbg")..{
 		InitCommand=cmd(Center);
 	};
-	LoadActor("left")..{
+	LoadActor(path.."left")..{
 		InitCommand=cmd(x,SCREEN_LEFT+64;y,SCREEN_CENTER_Y);
 	};
-	LoadActor("right")..{
+	LoadActor(path.."right")..{
 		InitCommand=cmd(x,SCREEN_RIGHT-64;y,SCREEN_CENTER_Y);
 	};
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,137);
+		--InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,137);
+		InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,-117);
 		SetCommand=function(self)
 			if Song then
-				self:settext(Song:GetDisplayFullTitle());
+				self:settext("Final Result");
 			end;
 		end;
 	};
@@ -81,11 +83,11 @@ t[#t+1] = Def.ActorFrame {
 	LoadFont("Combo numbers")..{
 		InitCommand=function(self)
 			if Song then
-				local TotalStep=STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W5");
+				local TotalStep=STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W5");
 				self:settext(TotalStep);
 				self:horizalign(right);
 				self:zoom(.7);
-				if player == PLAYER_1 then
+				if player == player then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+107);
 				else
@@ -99,10 +101,10 @@ t[#t+1] = Def.ActorFrame {
 	LoadFont("Combo numbers")..{
 		InitCommand=function(self)
 			if Song then
-				self:settext(GAMESTATE:GetCurrentSteps(player):GetRadarValues(player):GetValue('RadarCategory_TapsAndHolds'));
+				self:settext(STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W5") + STATSMAN:GetAccumPlayedStageStats():GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_Miss"));
 				self:horizalign(left);
 				self:zoom(.7);
-				if player == PLAYER_1 then
+				if player == player then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+138);
 				else

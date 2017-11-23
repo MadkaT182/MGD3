@@ -11,7 +11,6 @@ t[#t+1] = Def.ActorFrame {
 				sIdx = sMax;
 			end
 			GAMESTATE:ApplyGameCommand('mod,'..SpeedMods[sIdx]);
-			--SCREENMAN:SystemMessage("Index "..sIdx.." - Mod:"..SpeedMods[sIdx]);
 			self:playcommand("Speed");
 		elseif params.Name == 'SpeedDown' then
 			sIdx = sIdx + 1;
@@ -19,7 +18,6 @@ t[#t+1] = Def.ActorFrame {
 				sIdx = 1;
 			end
 			GAMESTATE:ApplyGameCommand('mod,'..SpeedMods[sIdx]);
-			--SCREENMAN:SystemMessage("Index "..sIdx.." - Mod:"..SpeedMods[sIdx]);
 			self:playcommand("Speed");
 		end;
 	end;
