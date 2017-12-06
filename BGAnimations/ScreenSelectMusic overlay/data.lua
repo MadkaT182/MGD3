@@ -115,6 +115,8 @@ t[#t+1] = Def.ActorFrame {
 		    if song and steps ~=nil then
 				local GetRadar = GAMESTATE:GetCurrentSteps(PLAYER_1):GetRadarValues(PLAYER_1);
 				self:settext(GetRadar:GetValue('RadarCategory_TapsAndHolds'));
+			else
+				self:settext("");
 		    end;
 		end;
 	};
@@ -126,6 +128,8 @@ t[#t+1] = Def.ActorFrame {
 		    if song and steps ~=nil then
 				local GetRadar = GAMESTATE:GetCurrentSteps(PLAYER_1):GetRadarValues(PLAYER_1);
 				self:settext(GetRadar:GetValue('RadarCategory_Jumps'));
+			else
+				self:settext("");
 		    end;
 		end;
 	};
@@ -137,6 +141,8 @@ t[#t+1] = Def.ActorFrame {
 		    if song and steps ~=nil then
 				local GetRadar = GAMESTATE:GetCurrentSteps(PLAYER_1):GetRadarValues(PLAYER_1);
 				self:settext(GetRadar:GetValue('RadarCategory_Hands'));
+			else
+				self:settext("");
 		    end;
 		end;
 	};
@@ -148,6 +154,8 @@ t[#t+1] = Def.ActorFrame {
 		    if song and steps ~=nil then
 				local GetRadar = GAMESTATE:GetCurrentSteps(PLAYER_1):GetRadarValues(PLAYER_1);
 				self:settext(GetRadar:GetValue('RadarCategory_Holds'));
+			else
+				self:settext("");
 		    end;
 		end;
 	};
