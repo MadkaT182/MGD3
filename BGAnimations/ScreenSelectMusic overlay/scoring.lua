@@ -1,93 +1,74 @@
-local t = Def.ActorFrame {};
+local af = Def.ActorFrame{}
 
--- --Song Info
--- t[#t+1] = Def.ActorFrame {
--- 	InitCommand=function(self) s = self:GetChildren(); end;
--- 	--Steps
--- 	LoadFont("Combo numbers")..{
--- 		Name="Data";
--- 		InitCommand=cmd(zoom,.38;addy,-15);
--- 	};
--- 	--Possible
--- 	LoadFont("Combo numbers")..{
--- 		Name="Possible";
--- 		InitCommand=cmd(zoom,.38;addy,12);
--- 	};
+local taps_af = Def.ActorFrame{
+	PlayerJoinedMessageCommand=function(self, params) self:queuecommand("Init") end,
+	PlayerUnjoinedMessageCommand=function(self, params) self:queuecommand("Init") end,
 
--- 	SetCommand=function(self)
--- 		local song = GAMESTATE:GetCurrentSong();
--- 		if song then
--- 			--Song
--- 			steps = GAMESTATE:GetCurrentSteps(PLAYER_1);
--- 			if song and steps ~=nil then
--- 				local GetRadar = steps:GetRadarValues(PLAYER_1);
+    CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end,
+    CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end,
+}
 
--- 				--HighScore Data
--- 				local profile, scorelist;
--- 				if PROFILEMAN:IsPersistentProfile(PLAYER_1) then
--- 					profile = PROFILEMAN:GetProfile(PLAYER_1);
--- 				else
--- 					profile = PROFILEMAN:GetMachineProfile();
--- 				end
+for player in ivalues( {PLAYER_1, PLAYER_2} ) do
 
--- 				scorelist = profile:GetHighScoreList(song, steps);
+	taps_af[#taps_af+1] = Def.BitmapText{
+		Name="Actual",
+        Font="Combo numbers",
+        InitCommand=function(self)
+			self:visible( GAMESTATE:IsHumanPlayer(player) )
+				:zoom( #GAMESTATE:GetHumanPlayers()==2 and 0.2 or 0.38 )
+				:x( (#GAMESTATE:GetHumanPlayers()==2 and (player==PLAYER_1 and -30 or 30)) or 0  )
+				:y(-15)
+		end,
 
--- 				if scorelist then
--- 					local scores = scorelist:GetHighScores()[1];
+        ["CurrentSteps" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
+        ["CurrentTrail" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
 
--- 					if scores then
--- 						local radars = scores:GetRadarValues(PLAYER_1):GetValue('RadarCategory_TapsAndHolds');
--- 						s.Data:settext(radars);
--- 					else
--- 						s.Data:settext("");
--- 					end
--- 				end
-
--- 				--Possible steps
--- 				s.Possible:settext(GetRadar:GetValue('RadarCategory_TapsAndHolds'));
--- 			end;
--- 		else
--- 			--Not Song
--- 			s.Data:settext("");
--- 			s.Possible:settext("");
--- 		end;
--- 	end;
-
--- 	CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
--- 	CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
--- 	CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
--- };
-
-for player in ivalues( GAMESTATE:GetHumanPlayers() ) do
-    t[#t+1] = Def.BitmapText{
-        Font="Common normal",
-        InitCommand=function(self) self:diffuse( Color.White ):Center() end,
-
-        CurrentSongChangedMessageCommand=cmd(playcommand,   "Set"),
-        CurrentCourseChangedMessageCommand=cmd(playcommand, "Set"),
-        ["CurrentSteps" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=cmd(playcommand,"Set"),
-        ["CurrentTrail" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=cmd(playcommand,"Set"),
-    
         SetMessageCommand=function(self)
             self:settext("")
-            
+
             local song = (GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentCourse()) or GAMESTATE:GetCurrentSong()
             local steps = (GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentTrail(player)) or GAMESTATE:GetCurrentSteps(player)
             local profile = (PROFILEMAN:IsPersistentProfile(player) and PROFILEMAN:GetProfile(player)) or PROFILEMAN:GetMachineProfile()
-            
-            if song and steps then
+
+            if song and steps and profile then
                 local score_list = profile:GetHighScoreList(song,steps)
                 local scores = score_list:GetHighScores()
                 local top_score = scores[1]
 
                 if top_score then
                     local taps = top_score:GetRadarValues():GetValue("RadarCategory_TapsAndHolds")
-                    SM(taps)
                     self:settext(taps)
                 end
             end
         end,
     }
+
+	taps_af[#taps_af+1] = Def.BitmapText{
+		Name="Possible",
+        Font="Combo numbers",
+        InitCommand=function(self)
+			self:visible( GAMESTATE:IsHumanPlayer(player) )
+				:zoom( #GAMESTATE:GetHumanPlayers()==2 and 0.2 or 0.38 )
+				:x( (#GAMESTATE:GetHumanPlayers()==2 and (player==PLAYER_1 and -30 or 30)) or 0  )
+				:y(12)
+		end,
+
+        ["CurrentSteps" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
+        ["CurrentTrail" .. ToEnumShortString(player) .. "ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
+
+        SetMessageCommand=function(self)
+            self:settext("")
+
+            local steps = (GAMESTATE:IsCourseMode() and GAMESTATE:GetCurrentTrail(player)) or GAMESTATE:GetCurrentSteps(player)
+
+            if steps then
+  			  	local taps = steps:GetRadarValues(player):GetValue("RadarCategory_TapsAndHolds")
+                self:settext(taps)
+            end
+        end,
+    }
 end
 
-return t;
+af[#af+1] = taps_af
+
+return af
