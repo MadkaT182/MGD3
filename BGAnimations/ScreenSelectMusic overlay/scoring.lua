@@ -1,6 +1,4 @@
-local af = Def.ActorFrame{}
-
-local taps_af = Def.ActorFrame{
+local af = Def.ActorFrame{
 	PlayerJoinedMessageCommand=function(self, params) self:queuecommand("Init") end,
 	PlayerUnjoinedMessageCommand=function(self, params) self:queuecommand("Init") end,
 
@@ -10,10 +8,10 @@ local taps_af = Def.ActorFrame{
 
 for player in ivalues( {PLAYER_1, PLAYER_2} ) do
 
-	taps_af[#taps_af+1] = Def.BitmapText{
+	af[#af+1] = Def.BitmapText{
 		Name="Actual",
-        Font="Combo numbers",
-        InitCommand=function(self)
+		Font="Combo numbers",
+		InitCommand=function(self)
 			self:visible( GAMESTATE:IsHumanPlayer(player) )
 				:zoom( #GAMESTATE:GetHumanPlayers()==2 and 0.2 or 0.38 )
 				:x( (#GAMESTATE:GetHumanPlayers()==2 and (player==PLAYER_1 and -30 or 30)) or 0  )
@@ -43,10 +41,10 @@ for player in ivalues( {PLAYER_1, PLAYER_2} ) do
         end,
     }
 
-	taps_af[#taps_af+1] = Def.BitmapText{
+	af[#af+1] = Def.BitmapText{
 		Name="Possible",
-        Font="Combo numbers",
-        InitCommand=function(self)
+		Font="Combo numbers",
+		InitCommand=function(self)
 			self:visible( GAMESTATE:IsHumanPlayer(player) )
 				:zoom( #GAMESTATE:GetHumanPlayers()==2 and 0.2 or 0.38 )
 				:x( (#GAMESTATE:GetHumanPlayers()==2 and (player==PLAYER_1 and -30 or 30)) or 0  )
@@ -68,7 +66,5 @@ for player in ivalues( {PLAYER_1, PLAYER_2} ) do
         end,
     }
 end
-
-af[#af+1] = taps_af
 
 return af
