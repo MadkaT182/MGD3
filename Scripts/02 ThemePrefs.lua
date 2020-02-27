@@ -22,6 +22,12 @@ local Prefs =
 		Choices = { 1, 5, 10, 20, 40, 50, "Auto" },
 		Values = { 1, 5, 10, 20, 40, 50, 123456 }
 	},
+	CboUnder =
+	{
+		Default = true,
+		Choices = { OptionNameString('Off'), OptionNameString('On') },
+		Values = { false, true }
+	},
 }
 
 ThemePrefs.InitAll(Prefs)
