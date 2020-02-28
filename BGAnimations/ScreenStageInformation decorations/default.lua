@@ -1,15 +1,16 @@
 local t = Def.ActorFrame {};
 local batLives = ThemePrefs.Get("DefLives");
 
---TODO: Calculate automatic Lives
-if batLives == 123456 then
-	batLives = 1;
-end
+for pn in ivalues(GAMESTATE:GetEnabledPlayers()) do
+	if batLives == 123456 then
+		batLives = GetLives(pn);
+	end
 
---Mod definer
-GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Preferred'):LifeSetting('LifeType_Battery');
-GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Preferred'):BatteryLives(batLives);
-GAMESTATE:GetPlayerState(PLAYER_1):GetPlayerOptions('ModsLevel_Preferred'):FailSetting('FailType_Immediate');
+	--Mod definer
+	GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Preferred'):LifeSetting('LifeType_Battery');
+	GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Preferred'):BatteryLives(batLives);
+	GAMESTATE:GetPlayerState(pn):GetPlayerOptions('ModsLevel_Preferred'):FailSetting('FailType_Immediate');
+end;
 
 if GAMESTATE:IsCourseMode() then
 		t[#t+1] = Def.ActorFrame {
