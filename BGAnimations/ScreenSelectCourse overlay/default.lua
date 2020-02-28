@@ -21,6 +21,10 @@ t[#t+1] = Def.ActorFrame {
 	LoadActor(file)..{
 		InitCommand=cmd(Center);
 	};
+	LoadActor("data")..{
+		InitCommand=cmd(Center;addx,106;addy,-12);
+	};
+	LoadActor("accel");
 };
 
 return t;
