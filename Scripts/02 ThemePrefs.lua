@@ -16,6 +16,12 @@ local Prefs =
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true }
 	},
+	MenuFix =
+	{
+		Default = false,
+		Choices = { OptionNameString('Off'), OptionNameString('On') },
+		Values = { false, true }
+	},
 	DefLives =
 	{
 		Default = 1,
