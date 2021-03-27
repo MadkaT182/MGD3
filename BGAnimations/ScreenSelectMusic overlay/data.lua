@@ -30,7 +30,7 @@ end
 
 --Song Info
 t[#t+1] = Def.ActorFrame {
-	InitCommand=function(self) c = self:GetChildren(); end;
+	InitCommand=function(self) cs = self:GetChildren(); end;
 	--Title
 	LoadFont("MusicList titles")..{
 		Name="Title";
@@ -57,25 +57,32 @@ t[#t+1] = Def.ActorFrame {
 			else
 				title = song:GetDisplayFullTitle();
 			end;
-			c.Title:maxwidth(650);
-			c.Title:settext(title);
+			cs.Title:maxwidth(650);
+			cs.Title:settext(title);
 
 			local artist = song:GetDisplayArtist();
-			c.Artist:maxwidth(650);
-			c.Artist:settext(artist);
+			cs.Artist:maxwidth(650);
+			cs.Artist:settext(artist);
 
 			local seconds = song:MusicLengthSeconds();
-			c.Time:settext(SecondsToMMSSMsMs(seconds));
+			cs.Time:settext(SecondsToMMSSMsMs(seconds));
+			cs.Artist:diffusealpha(1);
+			cs.Time:diffusealpha(1);
 
-			c.Title:diffusealpha(1);
-			c.Artist:diffusealpha(1);
-			c.Time:diffusealpha(1);
+			--Insane
+			local insane = song:HasStepsTypeAndDifficulty(0,4);
+			if insane then
+				cs.Title:diffuse(Color("Red"));
+			else
+				cs.Title:diffuse(Color("White"));
+			end;
 
 		else
 			--Not Song
-			c.Title:diffusealpha(0);
-			c.Artist:diffusealpha(0);
-			c.Time:diffusealpha(0);
+			cs.Title:settext("No Song Selected");
+			cs.Title:diffuse(Color("White"));
+			cs.Artist:diffusealpha(0);
+			cs.Time:diffusealpha(0);
 		end;
 	end;
 	--BPM

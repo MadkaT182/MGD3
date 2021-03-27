@@ -18,15 +18,15 @@ local t = Def.ActorFrame {
 		OnCommand=cmd(sleep,0.5;linear,0.4;diffusealpha,0);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.6;zoom,1;diffusealpha,0;rotationz,250);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.8;zoom,1;diffusealpha,0;rotationz,-250);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,1;zoom,1;diffusealpha,0;rotationz,250);
 	};
 };

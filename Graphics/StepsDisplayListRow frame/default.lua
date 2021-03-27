@@ -1,4 +1,3 @@
-
 local t = Def.ActorFrame{};
 
 local CustomDifficultyToState = {
@@ -25,18 +24,26 @@ t[#t+1] = Def.ActorFrame{
 	SetCommand=function(self, param)
 		local tmeter = self:GetChild('tmeter');
 		local dname = self:GetChild('dname');
-		local song = "";
+		local song = GAMESTATE:GetCurrentSong();
 		local step;
 		local meter;
-		local cdiff = param.CustomDifficulty;
+		local cdiff;
 		self:stoptweening();
 		dname:visible(false);
 		tmeter:visible(false);
-		if cdiff then
+		if song then
 			step = param.Steps;
 			meter = param.Meter;
+			cdiff = param.CustomDifficulty;
 			dname:visible(true);
 			dname:settext(CustomDifficultyToState[cdiff]);
+			if cdiff == "Challenge" then
+				dname:diffuse(Color("Red"));
+				tmeter:diffuse(Color("Red"));
+			else
+				dname:diffuse(Color("White"));
+				tmeter:diffuse(Color("White"));
+			end;
 
 			if getenv("wheelstop") == 1 then
 				song = GAMESTATE:GetCurrentSong();

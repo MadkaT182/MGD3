@@ -3,7 +3,7 @@ local t = Def.ActorFrame {};
 if GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			BeginCommand=cmd(FullScreen);
+			BeginCommand=cmd(scale_or_crop_background);
 			InitCommand=function(self)
 				self:Load(THEME:GetPathG("Common fallback", "background"));
 			end;
@@ -22,7 +22,7 @@ else
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=cmd(sleep,4);
 		Def.Sprite{
-			BeginCommand=cmd(FullScreen);
+			BeginCommand=cmd(scale_or_crop_background);
 			InitCommand=function(self)
 				if Song then
 					if Song:HasBackground() then
@@ -39,7 +39,7 @@ else
 	if IsSongBoss(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			Def.Sprite{
-				BeginCommand=cmd(FullScreen);
+				BeginCommand=cmd(scale_or_crop_background);
 				InitCommand=function(self)
 					if Song then
 						if Song:HasBackground() then
@@ -57,7 +57,7 @@ else
 	if IsSongDash(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "../dash-bg" )..{
-				BeginCommand=cmd(FullScreen);
+				BeginCommand=cmd(scale_or_crop_background);
 				OnCommand=cmd(diffusealpha,1;sleep,0.2;decelerate,0.88;diffusealpha,0);
 			};
 		};
@@ -66,7 +66,7 @@ else
 	if IsSongLife(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			Def.Sprite{
-				BeginCommand=cmd(FullScreen);
+				BeginCommand=cmd(scale_or_crop_background);
 				InitCommand=function(self)
 					if Song then
 						if Song:HasBackground() then

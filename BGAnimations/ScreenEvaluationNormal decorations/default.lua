@@ -22,7 +22,7 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 		end;
-		OnCommand=cmd(FullScreen;diffusealpha,.2);
+		OnCommand=cmd(scale_or_crop_background;diffusealpha,.2);
 	};
 	LoadActor("../Shared_style")..{
 		InitCommand=cmd(diffusealpha,.15);

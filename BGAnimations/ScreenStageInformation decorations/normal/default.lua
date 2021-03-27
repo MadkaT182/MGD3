@@ -2,25 +2,10 @@ local Song = GAMESTATE:GetCurrentSong();
 local SongTit = Song:GetDisplayMainTitle();
 local dir = Song:GetSongDir();
 local t = Def.ActorFrame {};
-t[#t+1] = Def.ActorFrame {
-	Def.Sprite{
-		BeginCommand=cmd(FullScreen);
-		InitCommand=function(self)
-			if Song then
-				if Song:HasBackground() then
-						self:LoadBackground(Song:GetBackgroundPath());
-					else
-						self:Load(THEME:GetPathG("Common fallback", "background"));
-				end;
-			end;
-		end;
-		OnCommand=cmd(diffusealpha,0;decelerate,2;diffusealpha,1);
-	};
-};
 if string.find(dir,"Mungyodance") then
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			BeginCommand=cmd(FullScreen);
+			BeginCommand=cmd(scale_or_crop_background);
 			InitCommand=function(self)
 				if Song then
 					if Song:HasBackground() then
@@ -30,7 +15,23 @@ if string.find(dir,"Mungyodance") then
 					end;
 				end;
 			end;
-			OnCommand=cmd(blend,'BlendMode_Add';zoom,3;zoomx,1.34*3;diffusealpha,0;decelerate,2;FullScreen;diffusealpha,1);
+			OnCommand=cmd(zoom,3;diffusealpha,0;decelerate,2;scale_or_crop_background;diffusealpha,1);
+		};
+	};
+else
+	t[#t+1] = Def.ActorFrame {
+		Def.Sprite{
+			BeginCommand=cmd(scale_or_crop_background);
+			InitCommand=function(self)
+				if Song then
+					if Song:HasBackground() then
+							self:LoadBackground(Song:GetBackgroundPath());
+						else
+							self:Load(THEME:GetPathG("Common fallback", "background"));
+					end;
+				end;
+			end;
+			OnCommand=cmd(diffusealpha,0;decelerate,2;diffusealpha,1);
 		};
 	};
 end
@@ -43,15 +44,15 @@ t[#t+1] = Def.ActorFrame {
 		OnCommand=cmd(sleep,0.5;linear,0.4;diffusealpha,0);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.6;zoom,1;diffusealpha,0;rotationz,250);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.8;zoom,1;diffusealpha,0;rotationz,-250);
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(FullScreen);
+		BeginCommand=cmd(scale_or_crop_background);
 		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,1;zoom,1;diffusealpha,0;rotationz,250);
 	};
 };

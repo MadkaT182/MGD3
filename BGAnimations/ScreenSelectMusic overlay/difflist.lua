@@ -3,7 +3,11 @@ local t = Def.ActorFrame{
 		Name="StepsDisplayListRow";
 		CurrentSongChangedMessageCommand=function(self)
 			self:stoptweening();
-			self:visible(true);
+			if GAMESTATE:GetCurrentSong() then
+				self:visible(true);
+			else
+				self:visible(false);
+			end
 		end;
 		CurrentCourseChangedMessageCommand=cmd(playcommand,"CurrentSongChangedMessage";);
 		CursorP1 = Def.ActorFrame {
