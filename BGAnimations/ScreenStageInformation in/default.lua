@@ -3,7 +3,7 @@ local t = Def.ActorFrame {};
 if GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame {
 		LoadActor( "boss" )..{
-			OnCommand=cmd(play);
+			OnCommand=function(self) self:play() end;
 		};
 	};
 else
@@ -13,49 +13,49 @@ else
 	if SongTit == "I'm an Idiot" then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "windeu" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif SongTit == "What Do You Really Want" or SongTit == "What Do You Really Want EX" then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "crash" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif IsSongBoss(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "boss" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif IsSongEx(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "ex" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif IsSongDash(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "dash" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif IsSongNonstop(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "nonstop" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	elseif IsSongRemix(SongTit) then
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "remix" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	else
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "normal" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	end

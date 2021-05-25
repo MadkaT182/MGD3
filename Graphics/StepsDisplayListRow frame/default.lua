@@ -13,12 +13,12 @@ t[#t+1] = Def.ActorFrame{
 
 	LoadFont("Panedisplay Text")..{
 		Name="tmeter";
-		InitCommand=cmd(x,42;horizalign,right;zoom,.36);
+		InitCommand=function(self) self:x(31.5):horizalign(center):zoom(0.36) end;
 	};
 
 	LoadFont("Panedisplay Text")..{
 		Name="dname";
-		InitCommand=cmd(x,-68;horizalign,left;zoom,.36;maxwidth,170);
+		InitCommand=function(self) self:x(-68):horizalign(left):zoom(0.36):maxwidth(170) end;
 	};
 
 	SetCommand=function(self, param)

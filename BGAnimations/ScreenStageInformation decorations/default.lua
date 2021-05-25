@@ -51,7 +51,7 @@ else
 	else
 		t[#t+1] = Def.ActorFrame {
 			LoadActor( "normal" )..{
-				OnCommand=cmd(play);
+				OnCommand=function(self) self:play() end;
 			};
 		};
 	end

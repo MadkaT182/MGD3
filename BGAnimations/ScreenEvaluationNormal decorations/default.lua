@@ -5,7 +5,7 @@ local SongTit = Song:GetDisplayMainTitle();
 if not ThemePrefs.Get("AltResult") then
 t[#t+1] = Def.ActorFrame {
 	LoadActor("../ball3")..{
-		InitCommand=cmd(Center;zoom,14;z,-100;spin;effectmagnitude,44,44,44;diffusealpha,.5);
+		InitCommand=function(self) self:Center():zoom(14):z(-100):spin():effectmagnitude(44,44,44):diffusealpha(0.5) end;
 	};
 };
 end
@@ -22,21 +22,21 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 		end;
-		OnCommand=cmd(scale_or_crop_background;diffusealpha,.2);
+		OnCommand=function(self) self:scale_or_crop_background():diffusealpha(0.2) end;
 	};
 	LoadActor("../Shared_style")..{
-		InitCommand=cmd(diffusealpha,.15);
+		InitCommand=function(self) self:diffusealpha(0.15) end;
 	};
 };
 
 if ThemePrefs.Get("AltResult") then
 t[#t+1] = Def.ActorFrame {
 	LoadActor("../ball3")..{
-		InitCommand=cmd(Center;zoom,14;z,-100;spin;effectmagnitude,44,44,44;diffusealpha,1);
+		InitCommand=function(self) self:Center():zoom(14):z(-100):spin():effectmagnitude(44,44,44):diffusealpha(1) end;
 	};
 	--Video FX
 	LoadActor("../Shared_style")..{
-		InitCommand=cmd(z,-100;ztestmode,"WriteOnFail";diffusealpha,.1);
+		InitCommand=function(self) self:z(-100):ztestmode("WriteOnFail"):diffusealpha(0.1) end;
 	};
 };
 end
@@ -53,20 +53,20 @@ t[#t+1] = Def.ActorFrame {
 				self:setsize(200,150);
 			end;
 		end;
-		OnCommand=cmd(x,SCREEN_CENTER_X-160;y,SCREEN_CENTER_Y+8);
+		OnCommand=function(self) self:x(SCREEN_CENTER_X-160):y(SCREEN_CENTER_Y+8) end;
 	};
 	LoadActor("rankbg")..{
-		InitCommand=cmd(Center);
+		InitCommand=function(self) self:Center() end;
 	};
 	LoadActor("left")..{
-		InitCommand=cmd(x,SCREEN_LEFT+64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_LEFT+64):y(SCREEN_CENTER_Y) end;
 	};
 	LoadActor("right")..{
-		InitCommand=cmd(x,SCREEN_RIGHT-64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_RIGHT-64):y(SCREEN_CENTER_Y) end;
 	};
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,137);
+		InitCommand=function(self) self:zoom(0.5):Center():queuecommand("Set"):addy(137) end;
 		SetCommand=function(self)
 			if Song then
 				self:settext(Song:GetDisplayFullTitle());
@@ -81,10 +81,10 @@ t[#t+1] = Def.ActorFrame {
 	LoadFont("Combo numbers")..{
 		InitCommand=function(self)
 			if Song then
-				local TotalStep=STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W5");
+				local TotalStep=STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetCurStageStats():GetPlayerStageStats(PLAYER_1):GetTapNoteScores("TapNoteScore_W4");
 				self:settext(TotalStep);
 				self:horizalign(right);
-				self:zoom(.7);
+				self:zoom(0.7);
 				if player == PLAYER_1 then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+107);
@@ -101,7 +101,7 @@ t[#t+1] = Def.ActorFrame {
 			if Song then
 				self:settext(GAMESTATE:GetCurrentSteps(player):GetRadarValues(player):GetValue('RadarCategory_TapsAndHolds'));
 				self:horizalign(left);
-				self:zoom(.7);
+				self:zoom(0.7);
 				if player == PLAYER_1 then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+138);

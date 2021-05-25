@@ -1,8 +1,8 @@
 return Def.ActorFrame {
 	LoadActor("shared_main")..{
-		InitCommand=cmd(FullScreen);
+		InitCommand=function(self) self:FullScreen() end;
 	};
-	Def.Quad{
-		OnCommand=cmd(FullScreen;diffusecolor,Color.Black;diffusealpha,.6);
-	};
+--	Def.Quad{
+--		OnCommand=function(self) self:FullScreen():diffusecolor(Color.Black):diffusealpha(0.6) end;
+--	};
 }

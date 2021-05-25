@@ -11,20 +11,20 @@ t[#t+1] = Def.ActorFrame {
 	InitCommand=function(self) c = self:GetChildren(); end;
 	LoadActor(file1)..{
 		Name="BG1";
-		InitCommand=cmd(Center);
+		InitCommand=function(self) self:Center() end;
 	};
 	LoadActor(file2)..{
 		Name="BG2";
-		InitCommand=cmd(Center);
+		InitCommand=function(self) self:Center() end;
 	};
 	LoadActor("difflist")..{
-		InitCommand=cmd(Center;addx,40;addy,-140);
+		InitCommand=function(self) self:Center():addx(40):addy(-140) end;
 	};
 	LoadActor("scoring")..{
-		InitCommand=cmd(Center;addx,180;addy,-117);
+		InitCommand=function(self) self:Center():addx(180):addy(-117) end;
 	};
 	LoadActor("data")..{
-		InitCommand=cmd(Center;addx,106;addy,-12);
+		InitCommand=function(self) self:Center():addx(106):addy(-12) end;
 	};
 	LoadActor("accel");
 	SetCommand=function(self)
@@ -40,7 +40,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	end;
 	
-	CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
+	CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
 };
 
 return t;

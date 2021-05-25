@@ -1,6 +1,6 @@
 return Def.ActorFrame {
 	Def.Banner{
-		InitCommand=cmd();
+		InitCommand=function(self) end;
 		SetMessageCommand=function(self,params)
 			local so = GAMESTATE:GetSortOrder();
 			local group = params.Text;

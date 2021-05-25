@@ -10,7 +10,7 @@ t[#t+1] = Def.ActorFrame {
 		end
 		self:playcommand( "Off" )
 	end,
-	HideSystemMessageMessageCommand=cmd(finishtweening),
+	HideSystemMessageMessageCommand=function(self) self:finishtweening() end,
 
 	Def.Quad {
 		InitCommand=function(self)

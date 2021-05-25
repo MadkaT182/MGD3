@@ -19,7 +19,7 @@ if Song then
 	else
 		t[#t+1] = Def.ActorFrame {
 			Def.Sprite{
-				BeginCommand=cmd(scale_or_crop_background);
+				BeginCommand=function(self) self:scale_or_crop_background() end;
 				InitCommand=function(self)
 					if Song then
 						if Song:HasBackground() then
@@ -29,7 +29,7 @@ if Song then
 						end;
 					end;
 				end;
-				OnCommand=cmd(diffusealpha,.5);
+				OnCommand=function(self) self:diffusealpha(0.5) end;
 			};
 		};
 	end;

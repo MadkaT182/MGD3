@@ -11,7 +11,7 @@ local t = Def.ActorFrame{
 				self:effectcolor2(1,0,0,1);
 			end;
 			self:settext(glifemeter:GetTotalLives());
-			self:zoom(.6);
+			self:zoom(0.6);
 			self:horizalign(center);
 		end;
 		LifeChangedMessageCommand=function(self,params)

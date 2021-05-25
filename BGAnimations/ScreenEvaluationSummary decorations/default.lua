@@ -22,7 +22,7 @@ end
 if not ThemePrefs.Get("AltResult") then
 t[#t+1] = Def.ActorFrame {
 	LoadActor("../ball3")..{
-		InitCommand=cmd(Center;zoom,14;z,-100;spin;effectmagnitude,44,44,44;diffusealpha,.5);
+		InitCommand=function(self) self:Center():zoom(14):z(-100):spin():effectmagnitude(44,44,44):diffusealpha(0.5) end;
 	};
 };
 end
@@ -58,25 +58,25 @@ t[#t+1] = Def.ActorFrame {
 				end;
 			end;
 		end;
-		OnCommand=cmd(FullScreen;diffusealpha,.2);
+		OnCommand=function(self) self:FullScreen():diffusealpha(0.2) end;
 		ItemCommand=function(self)
 			self:LoadBackground(tSongBg[sIndex]);
 			self:FullScreen();
 		end
 	};
 	LoadActor("../Shared_style")..{
-		InitCommand=cmd(diffusealpha,.15);
+		InitCommand=function(self) self:diffusealpha(0.15) end;
 	};
 };
 
 if ThemePrefs.Get("AltResult") then
 t[#t+1] = Def.ActorFrame {
 	LoadActor("../ball3")..{
-		InitCommand=cmd(Center;zoom,14;z,-100;spin;effectmagnitude,44,44,44;diffusealpha,1);
+		InitCommand=function(self) self:Center():zoom(14):z(-100):spin():effectmagnitude(44,44,44):diffusealpha(1) end;
 	};
 	--Video FX
 	LoadActor("../Shared_style")..{
-		InitCommand=cmd(z,-100;ztestmode,"WriteOnFail";diffusealpha,.1);
+		InitCommand=function(self) self:z(-100):ztestmode("WriteOnFail"):diffusealpha(0.1) end;
 	};
 };
 end
@@ -93,24 +93,24 @@ t[#t+1] = Def.ActorFrame {
 				self:setsize(200,150);
 			end;
 		end;
-		OnCommand=cmd(x,SCREEN_CENTER_X-160;y,SCREEN_CENTER_Y+8);
+		OnCommand=function(self) self:x(SCREEN_CENTER_X-160):y(SCREEN_CENTER_Y+8) end;
 		ItemCommand=function(self)
 			self:LoadBackground(tSongBg[sIndex]);
 			self:setsize(200,150);
 		end
 	};
 	LoadActor(path.."rankbg")..{
-		InitCommand=cmd(Center);
+		InitCommand=function(self) self:Center() end;
 	};
 	LoadActor(path.."left")..{
-		InitCommand=cmd(x,SCREEN_LEFT+64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_LEFT+64):y(SCREEN_CENTER_Y) end;
 	};
 	LoadActor(path.."right")..{
-		InitCommand=cmd(x,SCREEN_RIGHT-64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_RIGHT-64):y(SCREEN_CENTER_Y) end;
 	};
 	LoadFont("MusicList titles")..{
 		Name="SongTit";
-		InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,137);
+		InitCommand=function(self) self:zoom(0.5):Center():queuecommand("Set"):addy(137) end;
 		SetCommand=function(self)
 			if Song then
 				self:settext(Song:GetDisplayFullTitle());
@@ -122,7 +122,7 @@ t[#t+1] = Def.ActorFrame {
 	};
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=cmd(zoom,.5;Center;queuecommand,"Set";addy,-117);
+		InitCommand=function(self) self:zoom(0.5):Center():queuecommand("Set"):addy(-117) end;
 		SetCommand=function(self)
 			if Song then
 				self:settext("Final Result");
@@ -137,9 +137,9 @@ t[#t+1] = Def.ActorFrame {
 	LoadFont("Combo numbers")..{
 		InitCommand=function(self)
 			if Song then
-				self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W5") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_Miss"));
+				self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4"));
 				self:horizalign(right);
-				self:zoom(.7);
+				self:zoom(0.7);
 				if player == player then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+107);
@@ -150,7 +150,7 @@ t[#t+1] = Def.ActorFrame {
 			end;
 		end;
 		ItemCommand=function(self)
-			self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W5") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_Miss"));
+			self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4"));
 		end
 	};
 	--Total notes
@@ -159,7 +159,7 @@ t[#t+1] = Def.ActorFrame {
 			if Song then
 				self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetRadarPossible():GetValue('RadarCategory_TapsAndHolds'));
 				self:horizalign(left);
-				self:zoom(.7);
+				self:zoom(0.7);
 				if player == player then
 					self:y(SCREEN_CENTER_Y+20);
 					self:x(SCREEN_CENTER_X+138);

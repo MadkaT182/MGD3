@@ -22,11 +22,11 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	end;
 	LoadActor(THEME:GetPathS("ScreenSelectMusic","options"))..{
-		OnCommand=cmd(stop);
-		SpeedCommand=cmd(play);
+		OnCommand=function(self) self:stop() end;
+		SpeedCommand=function(self) self:play() end;
 	};
 	LoadFont("OptionIcon")..{
-		OnCommand=cmd(x,SCREEN_CENTER_X+100;y,SCREEN_BOTTOM-50;diffuse,color('#BEC1C6');zoom,.76);
+		OnCommand=function(self) self:x(SCREEN_CENTER_X+100):y(SCREEN_BOTTOM-50):diffuse(color('#BEC1C6')):zoom(0.76) end;
 		SpeedCommand=function(self)
 			self:settext(string.upper(SpeedMods[sIdx]));
 		end;

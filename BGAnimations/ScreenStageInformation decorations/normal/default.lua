@@ -5,7 +5,7 @@ local t = Def.ActorFrame {};
 if string.find(dir,"Mungyodance") then
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			BeginCommand=cmd(scale_or_crop_background);
+			BeginCommand=function(self) self:scale_or_crop_background() end;
 			InitCommand=function(self)
 				if Song then
 					if Song:HasBackground() then
@@ -15,13 +15,13 @@ if string.find(dir,"Mungyodance") then
 					end;
 				end;
 			end;
-			OnCommand=cmd(zoom,3;diffusealpha,0;decelerate,2;scale_or_crop_background;diffusealpha,1);
+			OnCommand=function(self) self:zoom(3):diffusealpha(0):decelerate(2):scale_or_crop_background():diffusealpha(1) end;
 		};
 	};
 else
 	t[#t+1] = Def.ActorFrame {
 		Def.Sprite{
-			BeginCommand=cmd(scale_or_crop_background);
+			BeginCommand=function(self) self:scale_or_crop_background() end;
 			InitCommand=function(self)
 				if Song then
 					if Song:HasBackground() then
@@ -31,29 +31,29 @@ else
 					end;
 				end;
 			end;
-			OnCommand=cmd(diffusealpha,0;decelerate,2;diffusealpha,1);
+			OnCommand=function(self) self:diffusealpha(0):decelerate(2):diffusealpha(1) end;
 		};
 	};
 end
 t[#t+1] = Def.ActorFrame {
 	Def.Quad{
-		OnCommand=cmd(FullScreen;diffusecolor,Color.White;zoomy,6.5;decelerate,0.34;zoomy,0.013;sleep,0.1;accelerate,0.35;diffusealpha,0;zoomx,0);
+		OnCommand=function(self) self:FullScreen():diffusecolor(Color.White):zoomy(SCREEN_HEIGHT):decelerate(0.34):zoomy(0.013):sleep(0.1):accelerate(0.35):diffusealpha(0):zoomx(0) end;
 	};
 	LoadActor( "../../select" )..{
-		BeginCommand=cmd(Center);
-		OnCommand=cmd(sleep,0.5;linear,0.4;diffusealpha,0);
+		BeginCommand=function(self) self:Center() end;
+		OnCommand=function(self) self:sleep(0.5):linear(0.4):diffusealpha(0) end;
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(scale_or_crop_background);
-		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.6;zoom,1;diffusealpha,0;rotationz,250);
+		BeginCommand=function(self) self:scale_or_crop_background() end;
+		OnCommand=function(self) self:diffusealpha(0.6):zoom(0.2):accelerate(0.6):zoom(1):diffusealpha(0):rotationz(250) end;
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(scale_or_crop_background);
-		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,0.8;zoom,1;diffusealpha,0;rotationz,-250);
+		BeginCommand=function(self) self:scale_or_crop_background() end;
+		OnCommand=function(self) self:diffusealpha(0.6):zoom(0.2):accelerate(0.8):zoom(1):diffusealpha(0):rotationz(-250) end;
 	};
 	LoadActor( "../../spin" )..{
-		BeginCommand=cmd(scale_or_crop_background);
-		OnCommand=cmd(diffusealpha,0.6;zoom,0.2;accelerate,1;zoom,1;diffusealpha,0;rotationz,250);
+		BeginCommand=function(self) self:scale_or_crop_background() end;
+		OnCommand=function(self) self:diffusealpha(0.6):zoom(0.2):accelerate(1):zoom(1):diffusealpha(0):rotationz(250) end;
 	};
 };
 return t;

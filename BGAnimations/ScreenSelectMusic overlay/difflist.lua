@@ -9,9 +9,9 @@ local t = Def.ActorFrame{
 				self:visible(false);
 			end
 		end;
-		CurrentCourseChangedMessageCommand=cmd(playcommand,"CurrentSongChangedMessage";);
+		CurrentCourseChangedMessageCommand=function(self) self:playcommand("CurrentSongChangedMessage") end;
 		CursorP1 = Def.ActorFrame {
-			InitCommand=cmd(x,0;player,PLAYER_1);
+			InitCommand=function(self) self:x(0):player(PLAYER_1) end;
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_1 then
 					self:visible(true);
@@ -23,8 +23,8 @@ local t = Def.ActorFrame{
 				end;
 			end;
 			LoadActor(THEME:GetPathG("","CursorP1"))..{
-				CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"PositionCheck");
-				CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"PositionCheck");
+				CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("PositionCheck") end;
+				CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("PositionCheck") end;
 				PositionCheckCommand=function(self)
 					self:stoptweening();
 					if getenv("wheelstop") == 1 then
@@ -58,7 +58,7 @@ local t = Def.ActorFrame{
 			};
 		};
 		CursorP2 = Def.ActorFrame {
-			InitCommand=cmd(x,49;player,PLAYER_2);
+			InitCommand=function(self) self:x(49):player(PLAYER_2) end;
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_2 then
 					self:visible(true);
@@ -70,9 +70,9 @@ local t = Def.ActorFrame{
 				end;
 			end;
 			LoadActor(THEME:GetPathG("","CursorP1"))..{
-				InitCommand=cmd(zoomx,-1);
-				CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"PositionCheck");
-				CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"PositionCheck");
+				InitCommand=function(self) self:zoomx(-1) end;
+				CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("PositionCheck") end;
+				CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("PositionCheck") end;
 				PositionCheckCommand=function(self)
 					self:stoptweening();
 					if getenv("wheelstop") == 1 then

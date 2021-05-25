@@ -1,14 +1,14 @@
 return Def.ActorFrame {
 	LoadActor("Logo/mgdlogo")..{
-		InitCommand=cmd(x,SCREEN_CENTER_X;y,SCREEN_CENTER_Y;blend,'BlendMode_Add';diffusealpha,.25);
+		InitCommand=function(self) self:Center():blend('BlendMode_Add'):diffusealpha(0.25) end;
 	};
 	Def.Quad{
-		OnCommand=cmd(FullScreen;diffusecolor,Color.Black;diffusealpha,.7);
+		OnCommand=function(self) self:FullScreen():diffusecolor(Color.Black):diffusealpha(0.7) end;
 	};
 	LoadActor("ScreenEvaluationNormal decorations/left")..{
-		InitCommand=cmd(x,SCREEN_LEFT+64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_LEFT+64):y(SCREEN_CENTER_Y) end;
 	};
 	LoadActor("ScreenEvaluationNormal decorations/right")..{
-		InitCommand=cmd(x,SCREEN_RIGHT-64;y,SCREEN_CENTER_Y);
+		InitCommand=function(self) self:x(SCREEN_RIGHT-64):y(SCREEN_CENTER_Y) end;
 	};
 }

@@ -1,6 +1,6 @@
 local t = Def.ActorFrame{
 	LoadActor("micro")..{
-		InitCommand=cmd(FullScreen;);
+		InitCommand=function(self) self:FullScreen() end;
 		OnCommand=function(self)
 			local w = DISPLAY:GetDisplayWidth() / self:GetWidth();
 			local h = DISPLAY:GetDisplayHeight() / self:GetHeight();

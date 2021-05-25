@@ -1,5 +1,5 @@
 return Def.ActorFrame {
 	LoadActor("shared_style")..{
-		InitCommand=cmd(FullScreen);
+		InitCommand=function(self) self:FullScreen() end;
 	};
 }

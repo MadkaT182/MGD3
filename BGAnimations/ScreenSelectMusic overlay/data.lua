@@ -34,17 +34,17 @@ t[#t+1] = Def.ActorFrame {
 	--Title
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=cmd(horizalign,left;zoom,.41;x,-134;y,2);
+		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(2) end;
 	};
 	--Artist
 	LoadFont("MusicList titles")..{
 		Name="Artist";
-		InitCommand=cmd(horizalign,left;zoom,.41;x,-134;y,24);
+		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(24) end;
 	};
 	--Time
 	LoadFont("ScreenSelectMusic total time")..{
 		Name="Time";
-		InitCommand=cmd(horizalign,center;y,88;x,69);
+		InitCommand=function(self) self:horizalign(center):y(88):x(69) end;
 	};
 
 	SetCommand=function(self)
@@ -89,13 +89,13 @@ t[#t+1] = Def.ActorFrame {
 	Def.BPMDisplay {
 		File=THEME:GetPathF("BPM", "Display");
 		Name="BPMDisplay";
-		InitCommand=cmd(x,38;y,132;horizalign,center;zoom,.62);
+		InitCommand=function(self) self:x(5):y(133):horizalign(left):zoom(0.62):maxwidth(210) end;-- LEFT
 		SetCommand=function(self) self:SetFromGameState() end;
 	};
 
 	-- difficulty icons
 	DifficultyIcons(PLAYER_1) .. {
-		BeginCommand=cmd(x,76;y,-52;zoom,.8);
+		BeginCommand=function(self) self:x(76):y(-52):zoom(0.8) end;
 		SetCommand=function(self)
 			if not GAMESTATE:GetCurrentSong() then self:visible(false)
 			else self:visible(true)
@@ -104,7 +104,7 @@ t[#t+1] = Def.ActorFrame {
 		Condition=GAMESTATE:IsHumanPlayer(PLAYER_1);
 	};
 	DifficultyIcons(PLAYER_2) .. {
-		BeginCommand=cmd(x,172;y,-52;zoom,.8);
+		BeginCommand=function(self) self:x(172):y(-52):zoom(0.8) end;
 		SetCommand=function(self)
 			if not GAMESTATE:GetCurrentSong() then self:visible(false);
 			else self:visible(true);
@@ -115,7 +115,7 @@ t[#t+1] = Def.ActorFrame {
 
 --Panel Values
 	LoadFont("Panedisplay Text")..{
-		InitCommand=cmd(zoom,.36;horizalign,right;y,70;x,-11);
+		InitCommand=function(self) self:zoom(0.36):horizalign(right):y(70):x(-11) end;
 		SetCommand=function(self)
 		    steps = GAMESTATE:GetCurrentSteps(PLAYER_1)
 		    local song = GAMESTATE:GetCurrentSong();
@@ -128,7 +128,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	};
 	LoadFont("Panedisplay Text")..{
-		InitCommand=cmd(zoom,.36;horizalign,right;y,91;x,-11);
+		InitCommand=function(self) self:zoom(0.36):horizalign(right):y(91):x(-11) end;
 		SetCommand=function(self)
 		    steps = GAMESTATE:GetCurrentSteps(PLAYER_1)
 		    local song = GAMESTATE:GetCurrentSong();
@@ -141,7 +141,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	};
 	LoadFont("Panedisplay Text")..{
-		InitCommand=cmd(zoom,.36;horizalign,right;y,112;x,-11);
+		InitCommand=function(self) self:zoom(0.36):horizalign(right):y(112):x(-11) end;
 		SetCommand=function(self)
 		    steps = GAMESTATE:GetCurrentSteps(PLAYER_1)
 		    local song = GAMESTATE:GetCurrentSong();
@@ -154,7 +154,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	};
 	LoadFont("Panedisplay Text")..{
-		InitCommand=cmd(zoom,.36;horizalign,right;y,133;x,-11);
+		InitCommand=function(self) self:zoom(0.36):horizalign(right):y(133):x(-11) end;
 		SetCommand=function(self)
 		    steps = GAMESTATE:GetCurrentSteps(PLAYER_1)
 		    local song = GAMESTATE:GetCurrentSong();
@@ -167,10 +167,10 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	};
 
-	CurrentSongChangedMessageCommand=cmd(playcommand,"Set");
-	CurrentCourseChangedMessageCommand=cmd(playcommand,"Set");
-	CurrentStepsP1ChangedMessageCommand=cmd(playcommand,"Set");
-	CurrentStepsP2ChangedMessageCommand=cmd(playcommand,"Set");
+	CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
+	CurrentCourseChangedMessageCommand=function(self) self:playcommand("Set") end;
+	CurrentStepsP1ChangedMessageCommand=function(self) self:playcommand("Set") end;
+	CurrentStepsP2ChangedMessageCommand=function(self) self:playcommand("Set") end;
 };
 
 return t;
