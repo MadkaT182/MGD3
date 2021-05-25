@@ -17,7 +17,7 @@ t[#t+1] = Def.ActorFrame {
 		OnCommand=function(self) self:Center():diffusealpha(0):linear(0.5):diffusealpha(1) end;
 		OffCommand=function(self) self:diffusealpha(1):linear(0.5):diffusealpha(0) end;
 		GainFocusCommand=function(self) self:diffusealpha(0):linear(0.5):diffusealpha(1) end;
-		LoseFocusCommand=function(self) self:stoptweening()diffusealpha(0) end;
+		LoseFocusCommand=function(self) self:stoptweening():diffusealpha(0) end;
 	};
 };
 
