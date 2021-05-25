@@ -6,12 +6,12 @@ t[#t+1] = Def.ActorFrame {
 	--Title
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(2) end;
+		InitCommand=function(self) self:horizalign(left):zoom(0.82):x(-134):y(2) end;
 	};
 	--Artist
 	LoadFont("MusicList titles")..{
 		Name="Artist";
-		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(24) end;
+		InitCommand=function(self) self:horizalign(left):zoom(0.82):x(-134):y(24) end;
 	};
 
 	SetCommand=function(self)
@@ -19,11 +19,11 @@ t[#t+1] = Def.ActorFrame {
 		if course then
 			--Course
 			local title = course:GetDisplayFullTitle();
-			c.Title:maxwidth(650);
+			c.Title:maxwidth(325);
 			c.Title:settext(title);
 
 			local artist = course:GetScripter();
-			c.Artist:maxwidth(650);
+			c.Artist:maxwidth(325);
 			c.Artist:settext("Programmed by "..artist);
 
 			c.Title:diffusealpha(1);

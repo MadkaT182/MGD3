@@ -3,6 +3,12 @@ local sIdx = 2;
 local sMax = #SpeedMods;
 local t = Def.ActorFrame {};
 
+for pn in ivalues(GAMESTATE:GetEnabledPlayers()) do
+	if GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):ScrollSpeed() then
+		sIdx = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):ScrollSpeed() * 2;
+	end;
+end;
+
 t[#t+1] = Def.ActorFrame {
 	CodeMessageCommand = function(self, params)
 		if params.Name == 'SpeedUp' then
@@ -26,7 +32,7 @@ t[#t+1] = Def.ActorFrame {
 		SpeedCommand=function(self) self:play() end;
 	};
 	LoadFont("OptionIcon")..{
-		OnCommand=function(self) self:x(SCREEN_CENTER_X+100):y(SCREEN_BOTTOM-50):diffuse(color('#BEC1C6')):zoom(0.76) end;
+		OnCommand=function(self) self:x(SCREEN_CENTER_X+100):y(SCREEN_BOTTOM-50):settext(string.upper(SpeedMods[sIdx])):diffuse(color('#BEC1C6')):zoom(0.76) end;
 		SpeedCommand=function(self)
 			self:settext(string.upper(SpeedMods[sIdx]));
 		end;

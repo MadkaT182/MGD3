@@ -110,7 +110,7 @@ t[#t+1] = Def.ActorFrame {
 	};
 	LoadFont("MusicList titles")..{
 		Name="SongTit";
-		InitCommand=function(self) self:zoom(0.5):Center():queuecommand("Set"):addy(137) end;
+		InitCommand=function(self) self:zoom(1):Center():queuecommand("Set"):addy(137) end;
 		SetCommand=function(self)
 			if Song then
 				self:settext(Song:GetDisplayFullTitle());
@@ -122,7 +122,7 @@ t[#t+1] = Def.ActorFrame {
 	};
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=function(self) self:zoom(0.5):Center():queuecommand("Set"):addy(-117) end;
+		InitCommand=function(self) self:zoom(1):Center():queuecommand("Set"):addy(-117) end;
 		SetCommand=function(self)
 			if Song then
 				self:settext("Final Result");
@@ -139,6 +139,7 @@ t[#t+1] = Def.ActorFrame {
 			if Song then
 				self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W1") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W2") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W3") + STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetTapNoteScores("TapNoteScore_W4"));
 				self:horizalign(right);
+				self:maxwidth(244);
 				self:zoom(0.7);
 				if player == player then
 					self:y(SCREEN_CENTER_Y+20);
@@ -159,6 +160,7 @@ t[#t+1] = Def.ActorFrame {
 			if Song then
 				self:settext(STATSMAN:GetPlayedStageStats(sIndex):GetPlayerStageStats(player):GetRadarPossible():GetValue('RadarCategory_TapsAndHolds'));
 				self:horizalign(left);
+				self:maxwidth(244);
 				self:zoom(0.7);
 				if player == player then
 					self:y(SCREEN_CENTER_Y+20);

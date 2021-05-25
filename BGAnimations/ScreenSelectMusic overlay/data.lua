@@ -34,12 +34,12 @@ t[#t+1] = Def.ActorFrame {
 	--Title
 	LoadFont("MusicList titles")..{
 		Name="Title";
-		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(2) end;
+		InitCommand=function(self) self:horizalign(left):zoom(0.82):x(-134):y(2) end;
 	};
 	--Artist
 	LoadFont("MusicList titles")..{
 		Name="Artist";
-		InitCommand=function(self) self:horizalign(left):zoom(0.41):x(-134):y(24) end;
+		InitCommand=function(self) self:horizalign(left):zoom(0.82):x(-134):y(24) end;
 	};
 	--Time
 	LoadFont("ScreenSelectMusic total time")..{
@@ -57,11 +57,11 @@ t[#t+1] = Def.ActorFrame {
 			else
 				title = song:GetDisplayFullTitle();
 			end;
-			cs.Title:maxwidth(650);
+			cs.Title:maxwidth(325);
 			cs.Title:settext(title);
 
 			local artist = song:GetDisplayArtist();
-			cs.Artist:maxwidth(650);
+			cs.Artist:maxwidth(325);
 			cs.Artist:settext(artist);
 
 			local seconds = song:MusicLengthSeconds();
